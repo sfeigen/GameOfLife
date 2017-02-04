@@ -55,21 +55,33 @@ def save_state(habitat):
 
 def check(habitat):
     '''check neighbors // find a smart way to check the neighbors'''
-    return habitat
+    neighbors = []
+    for i in range(1, len(habitat)-1):
+        neighbors.append(habitat[i, i-1])
+        neighbors.append(habitat[i, i+1])
+        neighbors.append(habitat[i-1, 1])
+        neighbors.append(habitat[i+1, 1])
+        neighbors.append(habitat[i-1, i-1])
+        neighbors.append(habitat[i-1, i+1])
+        neighbors.append(habitat[i+1, i-1])
+        neighbors.append(habitat[i+1, i+1])
+
+    return neighbors
 
 def game_of_life():
     '''main engine'''
 
-    habitat = make_grid(3, 3)
+    # habitat = make_grid(3, 3)
+    habitat = np.matrix([[1, 4, 6, 9], [4, 7, 2, 3], [2, 6, 7, 1], [1, 3, 7, 0]])
+    print(habitat)
     generation = 0
     running = True
 
     while running:
-        check(habitat)
+        print(check(habitat))
+
         save_state(habitat)
         generation += 1
         running = False
-
-    print(habitat)
 
 game_of_life()
