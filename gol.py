@@ -43,11 +43,32 @@ End Conditions:
 
 import numpy as np
 
+STATE = []
+
 def make_grid(x_axis, y_axis):
     '''set up grid'''
     return np.zeros((x_axis, y_axis))
 
+def assign(habitat):
+    '''save the matrix state'''
+    STATE.append(habitat)
+
+def check(habitat):
+    '''check neighbors'''
+    for i in habitat:
+        print(i)
+
 def game_of_life():
     '''main engine'''
-    habitat = make_grid(5, 5)
 
+    habitat = make_grid(3, 3)
+    generation = 0
+    running = True
+
+    while running:
+        check(habitat)
+        assign(habitat)
+        generation += 1
+        running = False
+
+game_of_life()
