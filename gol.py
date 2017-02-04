@@ -47,16 +47,15 @@ STATE = []
 
 def make_grid(x_axis, y_axis):
     '''set up grid'''
-    return np.zeros((x_axis, y_axis))
+    return np.zeros([x_axis, y_axis])
 
-def assign(habitat):
+def save_state(habitat):
     '''save the matrix state'''
     STATE.append(habitat)
 
 def check(habitat):
-    '''check neighbors'''
-    for i in habitat:
-        print(i)
+    '''check neighbors // find a smart way to check the neighbors'''
+    return habitat
 
 def game_of_life():
     '''main engine'''
@@ -67,8 +66,10 @@ def game_of_life():
 
     while running:
         check(habitat)
-        assign(habitat)
+        save_state(habitat)
         generation += 1
         running = False
+
+    print(habitat)
 
 game_of_life()
