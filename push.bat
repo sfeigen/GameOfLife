@@ -1,5 +1,6 @@
+@ECHO off
 git add .
 git commit -m "changes"
 git push
-python
+python \k
 gol.py
