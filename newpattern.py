@@ -1,9 +1,6 @@
 ''' game of life '''
-import time
-import numpy as np
 
-#benchmark
-T1 = time.time()
+import numpy as np
 
 TILE = {}
 STATE = ['Untouched', 'Populated', 'Underpopulated', 'Overpopulated']
@@ -95,10 +92,5 @@ def game_of_life(size):
     # to get a better sense of things #
     print(np.arange(1, size * size + 1).reshape(size, size), "\n")
     neighbor_execute(size)
-    return size
 
-SIZE = game_of_life(6)
-
-# benchmark
-T0 = time.time()
-print("TOTAL RUNTIME FOR ", SIZE, " x ", SIZE, "BOARD: ", T0-T1)
+game_of_life(5)
