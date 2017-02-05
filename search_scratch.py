@@ -93,8 +93,7 @@ def main(size):
     alg(size)
 
 main(3)
-for i in TILE:
-    print(i, TILE[i][3])
+
 #benchmark
 T1 = time()
 print(T1 - T0, "seconds.")

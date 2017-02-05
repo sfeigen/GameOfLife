@@ -40,7 +40,7 @@ End Conditions:
 2. No moving squares,           stasis.
 3. Infinite repeating pattern,  symbiosis.
 '''
-from search_pattern import initialize_board
+from search_optimized import main
 import numpy as np
 
 STATE = []
@@ -51,7 +51,7 @@ def game_of_life(size, seed):
     print(np.arange(1, size * size + 1).reshape(size, size), "\n")
 
     # create initial board space
-    initialize_board(size)
+    main(size)
 
     # seed (state zero)
     return seed
