@@ -80,10 +80,11 @@ def alg(size):
             TILE[i][3].append(i-1)
             TILE[i][3].append(i+1)
 
-def main(size):
+def build_board(size):
     '''testing optimal search'''
     #create board
     create_board(size)
 
     #run alg
     alg(size)
+    return TILE
