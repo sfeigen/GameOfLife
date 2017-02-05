@@ -87,7 +87,7 @@ def initialize_board(size):
         #iterate using adjusting low and high bounds
         search_engine(size, low, high)
 
-initialize_board(1000)
+initialize_board(100)
 
 T1 = time()
 print(T1 - T0, "seconds.")
