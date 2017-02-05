@@ -2,7 +2,6 @@
 
 import numpy as np
 
-
 TILE = {}
 STATE = ['Untouched', 'Populated', 'Underpopulated', 'Overpopulated']
 STATE = list(enumerate(STATE))
