@@ -49,12 +49,16 @@ def find_neighbors(size):
             if run_corners:
                 TILE[1][3].append(2)
                 TILE[1][3].append(size+1)
+                TILE[1][3].append(size+2)
                 TILE[size][3].append(size-1)
                 TILE[size][3].append(size*2)
+                TILE[size][3].append((size*2) - 1)
                 TILE[lowerleft][3].append(lowerleft+1)
                 TILE[lowerleft][3].append(lowerleft-size)
+                TILE[lowerleft][3].append((lowerleft-size) + 1)
                 TILE[lowerright][3].append(lowerright-1)
                 TILE[lowerright][3].append(lowerright-size)
+                TILE[lowerright][3].append((lowerright-size) - 1)
                 run_corners = False
 
         elif i % size == 0 and i <= size * (size-1):

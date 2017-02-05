@@ -3,32 +3,30 @@ from search_optimized import board_tiles
 import numpy as np
 
 # debug
-SIZE = 6
+SIZE = 5
 TILE = board_tiles(SIZE)
 STATE = ['Untouched', 'Populated', 'Underpopulated', 'Overpopulated']
 STATE = list(enumerate(STATE))
 
+# Seed Config. 1
+# __ __ __ __ __
+#|__|__|__|__|__|
+#|__|[]|__|[]|__|
+#|__|[]|[]|[]|__|
+#|__|[]|[]|__|__|
+#|__|__|__|__|__|
+
 def seed():
-    ''' stable '''
-    TILE[9][1] = True
-    TILE[9][2] = STATE[1]
-    TILE[10][1] = True
-    TILE[10][2] = STATE[1]
-    TILE[14][1] = True
-    TILE[14][2] = STATE[1]
-    TILE[15][1] = True
-    TILE[15][2] = STATE[1]
-    TILE[16][1] = True
-    TILE[16][2] = STATE[1]
-    TILE[17][1] = True
-    TILE[17][2] = STATE[1]
-    TILE[20][1] = True
-    TILE[20][2] = STATE[1]
-    TILE[21][1] = True
-    TILE[21][2] = STATE[1]
+    ''' seed '''
+    seeds = [7, 9, 12, 13, 14, 17, 18]
+    for i in TILE:
+        if i in seeds:
+            TILE[i][1] = True
+            TILE[i][2] = STATE[1]
 
 def check():
     ''' checks the state of the board '''
+    seed()
     return None
 
 def update():
@@ -44,6 +42,3 @@ def print_status(tile):
     for i in tile:
         print(i, tile[i][1], tile[i][2], tile[i][3])
     print("\n", np.arange(1, SIZE * SIZE + 1).reshape(SIZE, SIZE), "\n")
-
-seed()
-print_status(TILE)

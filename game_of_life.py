@@ -41,16 +41,12 @@ End Conditions:
 3. Infinite repeating pattern,  symbiosis.
 '''
 from search_optimized import board_tiles
-from check_update import check, update, endgame
-import numpy as np
+from check_update import check, update, endgame, print_status
 
 STATE = []
 
 def game_of_life(size, seed):
     ''' main engine '''
-    # debug printout to get a better sense of things #
-    print(np.arange(1, size * size + 1).reshape(size, size), "\n")
-
     # create initial board space and set relationships
     tile = board_tiles(size)
 
@@ -64,7 +60,8 @@ def game_of_life(size, seed):
         #check the condition
         running = endgame()
 
-    # seed (state zero)
+    # debug
+    print_status(tile)
     return (seed, STATE)
 
 game_of_life(5, None)
