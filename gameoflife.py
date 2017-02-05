@@ -14,7 +14,7 @@ def create_board(size):
     return size
 
 def neighbors_corners(size):
-    ''' create network of checks for dict '''
+    ''' establish neighbors for corners '''
     #helper variables
     lowerleft = (size * (size-1)) + 1
     lowerright = size * size
@@ -29,12 +29,22 @@ def neighbors_corners(size):
     TILE[lowerright][3].append(TILE[lowerright-1][0])
     TILE[lowerright][3].append(TILE[lowerright-size][0])
 
+def neighbors_toprow(size):
+    ''' establish neighbors for top '''
+    for i in range(2, size):
+        TILE[i][3].append(i-1)
+        TILE[i][3].append(i+1)
+        TILE[i][3].append(i+4)
+        TILE[i][3].append(i+5)
+        TILE[i][3].append(i+6)
+        print(TILE[i][3])
+
 def game_of_life(size):
     ''' main engine '''
+    # to get a better sense of things #
+    print(np.arange(1, size * size + 1).reshape(size, size), "\n")
     size = create_board(size)
     neighbors_corners(size)
+    neighbors_toprow(size)
 
-    # to get a better sense of things #
-    print(np.arange(1, size * size + 1).reshape(size, size))
-
-game_of_life(3)
+game_of_life(5)
