@@ -1,9 +1,4 @@
 ''' game of life '''
-import time
-import numpy as np
-
-#benchmark
-T1 = time.time()
 
 TILE = {}
 STATE = ['Untouched', 'Populated', 'Underpopulated', 'Overpopulated']
@@ -31,7 +26,7 @@ def neighbors_corners(size):
     TILE[lowerright][3].append(lowerright-1)
     TILE[lowerright][3].append(lowerright-size)
 
-def neighbor_engine(size, low_range, high_range):
+def search_engine(size, low_range, high_range):
     ''' establish neighbors for top '''
 
     for i in range(low_range, high_range):
@@ -71,7 +66,7 @@ def neighbor_engine(size, low_range, high_range):
                 TILE[i][3].append(i - size)
                 TILE[i][3].append(i - (size + 1))
 
-def neighbor_execute(size):
+def initialize_board(size):
     ''' iterates over helper methods to fill interior '''
     size = create_board(size)
 
@@ -79,7 +74,7 @@ def neighbor_execute(size):
     neighbors_corners(size)
 
     #establish bottom boundary neighbors
-    neighbor_engine(size, 2, size)
+    search_engine(size, 2, size)
 
     # iterate to row # size - 1
     for row in range(1, size):
@@ -88,16 +83,4 @@ def neighbor_execute(size):
         high = (size * row) + (size)
 
         #iterate using adjusting low and high bounds
-        neighbor_engine(size, low, high)
-
-def game_of_life(size):
-    ''' main engine '''
-    # to get a better sense of things #
-    print(np.arange(1, size * size + 1).reshape(size, size), "\n")
-    neighbor_execute(size)
-    return size
-
-SIZE = game_of_life(1000)
-
-# benchmark, 1,000,000 cells in <3 seconds.
-T0 = time.time()
+        search_engine(size, low, high)

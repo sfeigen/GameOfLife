@@ -40,5 +40,16 @@ End Conditions:
 2. No moving squares,           stasis.
 3. Infinite repeating pattern,  symbiosis.
 '''
+from search_pattern import initialize_board
+from numpy import np
 
 STATE = []
+
+def game_of_life(size):
+    ''' main engine '''
+    # to get a better sense of things #
+    print(np.arange(1, size * size + 1).reshape(size, size), "\n")
+
+    # create initial board space
+    initialize_board(size)
+    
