@@ -5,6 +5,7 @@ import numpy as np
 # debug
 SIZE = 5
 TILE = board_tiles(SIZE)
+ALIVE = []
 STATE = ['Untouched', 'Populated', 'Underpopulated', 'Overpopulated']
 STATE = list(enumerate(STATE))
 
@@ -27,7 +28,17 @@ def seed():
 
 def check():
     ''' checks the state of the board '''
-    return None
+    # debug
+    seed()
+
+    # check for True tiles.
+    for i in TILE:
+        if TILE[i][1]:
+            ALIVE.append(TILE[i][0])
+    for j in ALIVE:
+        for i in ALIVE:
+            if j in TILE[i][3]:
+                print("Tile: ", j, "True Neighbor: ", i)
 
 def update():
     ''' updates the state of the board '''
@@ -42,3 +53,7 @@ def print_status(tile):
     for i in tile:
         print(i, tile[i][1], tile[i][2], tile[i][3])
     print("\n", np.arange(1, SIZE * SIZE + 1).reshape(SIZE, SIZE), "\n")
+
+# debug
+print_status(TILE)
+check()

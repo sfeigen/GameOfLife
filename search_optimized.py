@@ -20,6 +20,7 @@ def find_neighbors(size):
     lowerright = size * size
     left = (size + 1) % size
 
+
     run_interior, run_corners = True, True
     for i in range(1, (size*size) + 1):
         if run_interior:
