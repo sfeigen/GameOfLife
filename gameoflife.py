@@ -29,22 +29,47 @@ def neighbors_corners(size):
     TILE[lowerright][3].append(TILE[lowerright-1][0])
     TILE[lowerright][3].append(TILE[lowerright-size][0])
 
-def neighbors_toprow(size):
+def neighbor_engine(size, low_range, high_range):
     ''' establish neighbors for top '''
-    for i in range(2, size):
+
+    for i in range(low_range, high_range):
+        #side to side
         TILE[i][3].append(i-1)
         TILE[i][3].append(i+1)
-        TILE[i][3].append(i+4)
-        TILE[i][3].append(i+5)
-        TILE[i][3].append(i+6)
-        print(TILE[i][3])
+
+        #top
+        TILE[i][3].append(i+(size-1))
+        TILE[i][3].append(i+size)
+        TILE[i][3].append(i+(size+1))
+        if TILE[i][0] > size + 1:
+            #bottom
+            TILE[i][3].append(i-(size-1))
+            TILE[i][3].append(i-size)
+            TILE[i][3].append(i-(size+1))
+
+def neighbors_execute(size):
+    ''' iterates over helper methods to fill interior '''
+    size = create_board(size)
+
+    # establish corner neighbors
+    neighbors_corners(size)
+
+    #establish bottom boundary neighbors
+    neighbor_engine(size, 2, size)
+
+    # iterate to row # size - 1
+    for row in range(1, size - 1):
+        #helper variables
+        low = (size * row) + 2
+        high = (size * row) + (size)
+
+        #iterate using adjusting low and high bounds
+        neighbor_engine(size, low, high)
 
 def game_of_life(size):
     ''' main engine '''
     # to get a better sense of things #
     print(np.arange(1, size * size + 1).reshape(size, size), "\n")
-    size = create_board(size)
-    neighbors_corners(size)
-    neighbors_toprow(size)
+    neighbors_execute(size)
 
-game_of_life(5)
+game_of_life(4)
