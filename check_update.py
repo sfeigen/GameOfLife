@@ -9,6 +9,7 @@ STATE = ['Untouched', 'Populated', 'Underpopulated', 'Overpopulated']
 STATE = list(enumerate(STATE))
 
 # Seed Config. 1
+# Try and find better searching mech.
 # __ __ __ __ __
 #|__|__|__|__|__|
 #|__|[]|__|[]|__|
@@ -26,7 +27,6 @@ def seed():
 
 def check():
     ''' checks the state of the board '''
-    seed()
     return None
 
 def update():
