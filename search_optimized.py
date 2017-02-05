@@ -10,7 +10,7 @@ def create_board(size):
         TILE[i] = [i, False, STATE[0], []]
     return size
 
-def alg(size):
+def find_neighbors(size):
     '''smarter search'''
     create_board(size)
 
@@ -80,11 +80,11 @@ def alg(size):
             TILE[i][3].append(i-1)
             TILE[i][3].append(i+1)
 
-def build_board(size):
+def board_tiles(size):
     '''testing optimal search'''
     #create board
     create_board(size)
 
     #run alg
-    alg(size)
+    find_neighbors(size)
     return TILE

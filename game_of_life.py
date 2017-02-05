@@ -40,22 +40,31 @@ End Conditions:
 2. No moving squares,           stasis.
 3. Infinite repeating pattern,  symbiosis.
 '''
-from search_optimized import build_board
+from search_optimized import board_tiles
+from check_update import check, update, endgame
 import numpy as np
 
 STATE = []
 
 def game_of_life(size, seed):
     ''' main engine '''
-    # to get a better sense of things #
+    # debug printout to get a better sense of things #
     print(np.arange(1, size * size + 1).reshape(size, size), "\n")
 
-    # create initial board space
-    tile = build_board(size)
-    for i in tile:
-        print(tile[i])
+    # create initial board space and set relationships
+    tile = board_tiles(size)
+
+    # start engine
+    running = True
+    while running:
+        #check and log state
+        check()
+        #update state
+        update()
+        #check the condition
+        running = endgame()
 
     # seed (state zero)
-    return seed
+    return (seed, STATE)
 
-game_of_life(8, None)
+game_of_life(5, None)
