@@ -5,21 +5,17 @@ STATE = ['Untouched', 'Populated', 'Underpopulated', 'Overpopulated']
 STATE = list(enumerate(STATE))
 
 def create_board(size):
-    ''' create board '''
+    ''' helper method to create inital, blank board '''
     for i in range(1, (size*size) + 1):
         TILE[i] = [i, False, STATE[0], []]
-    return size
 
 def find_neighbors(size):
-    '''smarter search'''
-    create_board(size)
-
+    ''' change defaults to reflect tile relationships '''
     #corner helper variables
     corners = [1, size, (size * (size-1)) + 1, size*size]
     lowerleft = (size * (size-1)) + 1
     lowerright = size * size
     left = (size + 1) % size
-
 
     run_interior, run_corners = True, True
     for i in range(1, (size*size) + 1):
@@ -87,14 +83,14 @@ def find_neighbors(size):
 
 def seed_board():
     ''' seed '''
-    # seed = [8, 9, 13, 17, 18]
-    seed = [0]
+    seed = [8, 9, 13, 17, 18]
+    # seed = [0]
     for i in TILE:
         if i in seed:
             TILE[i][1] = True
 
 def initiate_board(size):
-    '''testing optimal search'''
+    '''initiate board'''
     #create board
     create_board(size)
 

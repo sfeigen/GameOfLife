@@ -33,13 +33,17 @@ def check(tiles):
     dead_count = 0
     for tile in tiles:
         for nbr in tiles:
-            # select tiles and check if neighbor is alive
+            # select live tiles and check if neighbor is alive
             if tiles[tile][1] and tiles[nbr][1] and tile in tiles[nbr][3]:
                 count += 1
+            # select dead tiles and check if neighbor is alive
             elif tiles[tile][1] is False and tiles[nbr][1] and tile in tiles[nbr][3]:
                 dead_count += 1
+            elif tiles[tile][1] and not tiles[nbr][1]:
+                tiles[tile][2] = STATE[2]
+
         # apply Conway.
-        if count > 1 and count < 4:
+        if count == 2 or count == 3:
             tiles[tile][2] = STATE[1]
             count = 0
         elif count == 1:
@@ -53,6 +57,7 @@ def check(tiles):
             tiles[tile][2] = STATE[1]
         count = 0
         dead_count = 0
+    return tiles
 
 def update(tiles):
     ''' updates the state of the board, and ends if depletion '''
@@ -61,13 +66,19 @@ def update(tiles):
             tiles[tile][1] = True
         if tiles[tile][2] == STATE[0] or tiles[tile][2] == STATE[2] or tiles[tile][2] == STATE[3]:
             tiles[tile][1] = False
-    # check for endgame by depletion.
+    return tiles
 
 def endgame(tiles):
     ''' checks for end condition and returns false '''
-    if True not in tiles[1]:
-        print("Endgame")
+    end = 0
+    for i in tiles:
+        if tiles[i][1] is False:
+            end += 1
+    if end == len(tiles):
+        print_status(tiles)
         return False
+    else:
+        return True
 
 def print_status(tiles):
     '''prints out status'''

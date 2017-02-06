@@ -52,16 +52,17 @@ def game_of_life(size):
 
     # start engine
     running = True
+    count = 0
     while running:
-        #show state
+        print("COUNT: ", count)
+        count += 1
+        #check the condition
         print_status(tiles)
         #check and log state
-        check(tiles)
+        tiles = check(tiles)
         #update state
-        update(tiles)
-        #check the condition
+        tiles = update(tiles)
+        #check win
         running = endgame(tiles)
-
-    # debug
 
 game_of_life(5)
