@@ -13,9 +13,9 @@ STATE = list(enumerate(STATE))
 # Try and find better searching mech.
 # __ __ __ __ __
 #|__|__|__|__|__|
-#|__|[]|__|[]|__|
-#|__|[]|[]|[]|__|
-#|__|[]|[]|__|__|
+#|__|07|__|09|__|
+#|__|12|13|14|__|
+#|__|17|18|__|__|
 #|__|__|__|__|__|
 
 def seed():
@@ -33,12 +33,10 @@ def check():
 
     # check for True tiles.
     for i in TILE:
-        if TILE[i][1]:
-            ALIVE.append(TILE[i][0])
-    for j in ALIVE:
-        for i in ALIVE:
-            if j in TILE[i][3]:
-                print("Tile: ", j, "True Neighbor: ", i)
+        for j in TILE:
+            # select alive tiles, check to see if
+            if TILE[i][1] and TILE[j][1] and i in TILE[j][3]:
+                print("Overlap ", "Neighbor", i, j)
 
 def update():
     ''' updates the state of the board '''
