@@ -41,7 +41,7 @@ End Conditions:
 3. Infinite repeating pattern,  symbiosis.
 '''
 from search_optimized import board_tiles
-from check_update import seed, check, update, endgame, print_status
+from check_update import seed_test, check, update, endgame, print_status
 
 STATE = []
 
@@ -49,7 +49,7 @@ def game_of_life(size):
     ''' main engine '''
     # create initial board space and set relationships
     tile = board_tiles(size)
-    seed()
+    seed_test()
 
     # start engine
     running = True
