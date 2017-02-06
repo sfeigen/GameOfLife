@@ -40,29 +40,28 @@ End Conditions:
 2. No moving squares,           stasis.
 3. Infinite repeating pattern,  symbiosis.
 '''
-from search_optimized import board_tiles
-from check_update import seed_test, check, update, endgame, print_status
+from setup_board import initiate_board
+from check_update import check, update, endgame, print_status
 
 STATE = []
 
 def game_of_life(size):
     ''' main engine '''
     # create initial board space and set relationships
-    tile = board_tiles(size)
-    seed_test()
+    tiles = initiate_board(size)
 
     # start engine
     running = True
     while running:
+        #show state
+        print_status(tiles)
         #check and log state
-        check()
+        check(tiles)
         #update state
-        update()
+        update(tiles)
         #check the condition
-        running = endgame()
+        running = endgame(tiles)
 
     # debug
-    print_status(tile)
-    return STATE
 
 game_of_life(5)

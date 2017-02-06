@@ -85,11 +85,22 @@ def find_neighbors(size):
             TILE[i][3].append(i-1)
             TILE[i][3].append(i+1)
 
-def board_tiles(size):
+def seed_board():
+    ''' seed '''
+    # seed = [8, 9, 13, 17, 18]
+    seed = [0]
+    for i in TILE:
+        if i in seed:
+            TILE[i][1] = True
+
+def initiate_board(size):
     '''testing optimal search'''
     #create board
     create_board(size)
 
-    #run alg
+    #seed board
+    seed_board()
+
+    #find neighbors
     find_neighbors(size)
     return TILE
