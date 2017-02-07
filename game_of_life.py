@@ -49,23 +49,20 @@ def game_of_life(size, seed):
     ''' main engine '''
     # create initial board space and set relationships
     board = initiate_board(size)
-    #seed board
     seed_board(seed)
-    #check the condition
+    print("\n", "Generation: 0")
     print_status(board)
+
     # start engine
     running = True
-    count = 1
+    gen = 1
     while running:
-        print("COUNT: ", count)
-        count += 1
-        #check and log state
+        print("\n", "Generation: ", gen)
+        gen += 1
+        # check, update, print, test
         check(board)
-        #update state
         update(board)
-        #check the condition
         print_status(board)
-        #check win
         running = endgame(board)
 
 # SEED = [5, 10, 11, 12]

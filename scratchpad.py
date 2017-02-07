@@ -1,31 +1,75 @@
 '''
-#   One method for optimizing is to flag tiles
-#   untouched by default, and to not calculate
-#   tile with this flag that borders alive.
-# __ __ __ __ __ __           __ __ __ __ __ __
-#|UT|__|__|__|UT|UT|         |__|__|__|__|UT|UT|
-#|__|__|[]|__|__|__|         |__|[]|[]|__|__|__|
-#|__|[]|[]|[]|[]|__|         |__|[]|##|##|[]|__|
-#|__|__|__|[]|__|__|   ->    |__|__|__|[]|[]|__|
-#|UT|UT|__|__|__|UT|         |UT|UT|__|__|__|__|
-#|UT|UT|UT|UT|UT|UT|         |UT|UT|UT|UT|UT|UT|
-#
-# Eg    : Seed = 6, stable pattern.
-# Normal: 6 x 6 * 2           = 72  check() calls.
-# Smart : 6 x 6 * 2 = 72 - 24 = 48  check() calls.
-#
-# 1. Iterate sequentially through all tiles that:
-#   != UT and have Neighbor
-#
-'''
+Conway's Game of Life
+Sam Feigenbaum <sfeigen@live.com>
 
-# __ __ __ __ __ __           __ __ __ __ __ __
-#|UT|__|__|__|__|UT|         |__|__|__|__|__|__|
-#|__|__|[]|[]|__|__|         |[]|[]|##|##|[]|[]|
-#|__|[]|[]|[]|[]|__|         |##|##|##|##|##|##|
-#|__|__|[]|[]|__|__|   ->    |[]|[]|##|##|[]|[]|
-#|UT|__|__|__|__|UT|         |__|__|__|__|__|__|
-#|UT|UT|UT|UT|UT|UT|         |UT|UT|UT|UT|UT|UT|
-# Gen.: 1                     Gen.: 4
-# Try and find a way to regenerate UT tiles after
-# they're killed.
+Key:
+[] = Alive
+## = Dead
+
+Rule 1: Any cell with less than 2 living neighbors, dies.
+Rule 2: Any living cell with 2 or 3 living neighbors, stays alive.
+ __ __ __        __ __ __
+|[]|__|__|      |##|__|__|
+|__|[]|__|  ->  |__|[]|__|
+|__|__|[]|      |__|__|##|
+Living:  3      Living: 1
+
+Rule 3: Any cell with greater than 3 neighbors, dies.
+ __ __ __        __ __ __
+|__|[]|__|      |__|[]|__|
+|[]|[]|[]|  ->  |[]|##|[]|
+|__|[]|__|      |__|[]|__|
+Living:  5      Living:  4
+
+Rule 4: Any cell with exactly 3 neighbors, lives.
+ __ __ __        __ __ __
+|[]|__|[]|      |##|[]|##|
+|__|[]|__|  ->  |__|[]|__|
+|__|__|__|      |__|__|__|
+Living:  3      Living:  2
+
+Example of all 4 in effect:
+ __ __ __        __ __ __
+|[]|__|[]|      |[]|[]|##|
+|[]|[]|__|  ->  |[]|##|__|
+|[]|__|__|      |[]|__|__|
+
+
+End Conditions:
+1. No living squares,           extinction.
+2. No moving squares,           stasis.
+3. Infinite repeating pattern,  symbiosis.
+'''
+from setup_board import initiate_board, seed_board
+from check_update import check, update, endgame, print_status
+
+# save state for program exporting / memory
+STATE = []
+
+def game_of_life(size, seed):
+    ''' main engine '''
+    # create initial board space and set relationships
+    board = initiate_board(size)
+    # seed board
+    seed_board(seed)
+    # check the condition
+    print_status(board)
+
+    # start engine
+    gen = 1
+    running = True
+    while running:
+        print("Generation: ", gen)
+        gen += 1
+        # check and log state
+        check(board)
+        # update state
+        update(board)
+        # print state
+        print_status(board)
+        # check win
+        running = endgame(board)
+
+# SEED = [5, 10, 11, 12]
+SEED = [8, 9, 13, 17, 18]
+game_of_life(5, SEED)

@@ -28,7 +28,7 @@ def check(tiles):
     ''' checks the state of the board '''
     board = tiles
 
-    # Conway's logic.
+    # Conway's logic
     count = 0
     dead_count = 0
     for tile in board:
@@ -42,7 +42,7 @@ def check(tiles):
             elif board[tile][1] and not board[nbr][1]:
                 board[tile][2] = STATE[2]
 
-        # apply Conway.
+        # apply Conway
         if count == 2 or count == 3:
             board[tile][2] = STATE[1]
             count = 0
@@ -52,7 +52,7 @@ def check(tiles):
         elif count > 3:
             board[tile][2] = STATE[3]
             count = 0
-        # wake the dead, Conway.
+        # wake the dead
         elif dead_count == 3:
             board[tile][2] = STATE[1]
         count = 0
@@ -60,7 +60,7 @@ def check(tiles):
     return board
 
 def update(board):
-    ''' updates the state of the board, and ends if depletion '''
+    ''' updates the state of the board '''
     for tile in board:
         if board[tile][2] == STATE[1]:
             board[tile][1] = True
@@ -82,4 +82,4 @@ def endgame(board):
 def print_status(board):
     '''prints out status'''
     for tile in board:
-        print(tile, " - ", board[tile][1], board[tile][2], board[tile][3])
+        print(tile, ":", board[tile][1], board[tile][2])
