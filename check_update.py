@@ -68,22 +68,13 @@ def update(board):
             board[tile][1] = True
         if board[tile][2] == STATE[0] or board[tile][2] == STATE[2] or board[tile][2] == STATE[3]:
             board[tile][1] = False
-
+    json_store(board)
     return board
 
 def json_store(board):
     ''' convert state to json and save '''
     json_board = json.dumps(board)
-    data = json.loads(json_board)
-    STORE.append(data)
-
-    # check for duplicates
-    dupes = []
-    for i in STORE:
-        if data.items() in STORE:
-            dupes.append(i)
-            print("DUPLICATES: ", dupes)
-    return data
+    STORE.append(json_board)
 
 def endgame(board):
     ''' checks for end condition and returns false '''
