@@ -77,9 +77,11 @@ def json_store(board):
     data = json.loads(json_board)
     STORE.append(data)
 
+    # check for duplicates
+    dupes = []
     for i in STORE:
-        dupes = set(data.items()) & set(i.items())
-        if len(dupes) > 0:
+        if data.items() in STORE:
+            dupes.append(i)
             print("DUPLICATES: ", dupes)
     return data
 

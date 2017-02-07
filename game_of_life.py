@@ -41,7 +41,7 @@ End Conditions:
 3. Infinite repeating pattern,  symbiosis.
 '''
 from setup_board import initiate_board, seed_board
-from check_update import check, update, print_status, endgame, STORE
+from check_update import check, update, print_status, endgame
 
 def game_of_life(size, seed):
     ''' main engine '''
@@ -64,7 +64,13 @@ def game_of_life(size, seed):
         print_status(board)
         running = endgame(board)
 
-# SEED = [5, 10, 11, 12]
-# SEED = [7, 8, 13, 14, 19]
-SEED = [8, 9, 13, 17, 18]
+# scenario 1: death
+# SEED = [8, 9, 13, 17, 18]
+
+# scenario 2: stasis
+SEED = [7, 8, 12, 13]
+
+# scenario 3: homeostasis
+# SEED = [12, 13, 14]
+
 game_of_life(5, SEED)
