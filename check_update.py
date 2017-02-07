@@ -85,7 +85,7 @@ def check_store(board):
         for json_board in STORE:
             count += 1
         if count > 10:
-            print("Infinite Seed")
+            print("Infinite Seed \n")
             return True
 
 def endgame(board):
@@ -100,6 +100,12 @@ def endgame(board):
         return False
     else:
         return True
+
+def resolve(board):
+    ''' resolve Conway '''
+    for i in board:
+        if board[i][2] is not STATE[0]:
+            print(i, ":", board[i][1], " Status: ", board[i][2])
 
 def print_status(board):
     '''prints out status'''
