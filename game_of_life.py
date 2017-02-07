@@ -41,7 +41,7 @@ End Conditions:
 3. Infinite repeating pattern,  symbiosis.
 '''
 from setup_board import initiate_board, seed_board
-from check_update import check, update, print_status, endgame
+from check_update import check, update, print_status, check_store, endgame
 
 def game_of_life(size, seed):
     ''' main engine '''
@@ -53,17 +53,22 @@ def game_of_life(size, seed):
 
     # start engine
     running = True
+    infinite = False
     gen = 1
-
-    while running:
+    count = 0
+    while running and not infinite:
         print("\n", "Generation: ", gen)
         gen += 1
         # check, update, log json, print, test
         check(board)
         update(board)
         print_status(board)
+        infinite = check_store(board)
         running = endgame(board)
 
+        count += 1
+        if count > 20:
+            running = False
 # scenario 1: death
 # SEED = [8, 9, 13, 17, 18]
 

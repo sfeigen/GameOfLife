@@ -68,21 +68,35 @@ def update(board):
             board[tile][1] = True
         if board[tile][2] == STATE[0] or board[tile][2] == STATE[2] or board[tile][2] == STATE[3]:
             board[tile][1] = False
+    #store board as JSON for export later
     json_store(board)
-    return board
 
 def json_store(board):
     ''' convert state to json and save '''
     json_board = json.dumps(board)
     STORE.append(json_board)
 
+def check_store(board):
+    ''' check for repeat in store '''
+    count = 0
+    json_board = json.dumps(board)
+
+    if json_board in STORE:
+        for json_board in STORE:
+            count += 1
+        if count > 10:
+            print("Infinite Seed")
+            return True
+
 def endgame(board):
     ''' checks for end condition and returns false '''
+    #check for death
     end = 0
     for tile in board:
         if board[tile][1] is False:
             end += 1
     if end == len(board):
+        print("Death")
         return False
     else:
         return True
