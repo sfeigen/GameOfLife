@@ -1,8 +1,5 @@
 ''' check and update functions '''
 
-STATE = ['Untouched', 'Populated', 'Underpopulated', 'Overpopulated']
-STATE = list(enumerate(STATE))
-
 # Seed Config. 1: (Infinite)
 # Run check() to transfer states.
 # __ __ __ __ __      __ __ __ __ __      __ __ __ __ __
@@ -23,6 +20,11 @@ STATE = list(enumerate(STATE))
 #|__|17|18|__|__|    |__|17|18|__|__|    |__|__|__|__|__|
 #|__|__|__|__|__|    |__|__|__|__|__|    |__|__|__|__|__|
 #
+
+import json
+from setup_board import STATE
+
+STORE = []
 
 def check(tiles):
     ''' checks the state of the board '''
@@ -66,7 +68,20 @@ def update(board):
             board[tile][1] = True
         if board[tile][2] == STATE[0] or board[tile][2] == STATE[2] or board[tile][2] == STATE[3]:
             board[tile][1] = False
+
     return board
+
+def json_store(board):
+    ''' convert state to json and save '''
+    json_board = json.dumps(board)
+    data = json.loads(json_board)
+    STORE.append(data)
+
+    for i in STORE:
+        dupes = set(data.items()) & set(i.items())
+        if len(dupes) > 0:
+            print("DUPLICATES: ", dupes)
+    return data
 
 def endgame(board):
     ''' checks for end condition and returns false '''
