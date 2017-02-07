@@ -75,7 +75,6 @@ def endgame(tiles):
         if tiles[i][1] is False:
             end += 1
     if end == len(tiles):
-        print_status(tiles)
         return False
     else:
         return True

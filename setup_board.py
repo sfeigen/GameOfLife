@@ -83,20 +83,22 @@ def find_neighbors(size):
 
 def seed_board():
     ''' seed '''
-    seed = [8, 9, 13, 17, 18]
+    # 5x5 death
+    # seed = [8, 9, 13, 17, 18]
+    # 4x4 death
+    seed = [5, 10, 11, 12]
+    # empty test
     # seed = [0]
     for i in TILE:
         if i in seed:
             TILE[i][1] = True
+            TILE[i][2] = 1
 
 def initiate_board(size):
     '''initiate board'''
     #create board
     create_board(size)
-
-    #seed board
-    seed_board()
-
     #find neighbors
     find_neighbors(size)
+
     return TILE
