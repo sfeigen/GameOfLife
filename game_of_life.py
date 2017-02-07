@@ -45,15 +45,14 @@ from check_update import check, update, endgame, print_status
 
 STATE = []
 
-def game_of_life(size):
+def game_of_life(size, seed):
     ''' main engine '''
     # create initial board space and set relationships
     board = initiate_board(size)
     #seed board
-    seed_board()
+    seed_board(seed)
     #check the condition
     print_status(board)
-
     # start engine
     running = True
     count = 1
@@ -69,4 +68,6 @@ def game_of_life(size):
         #check win
         running = endgame(board)
 
-game_of_life(4)
+# SEED = [5, 10, 11, 12]
+SEED = [8, 9, 13, 17, 18]
+game_of_life(5, SEED)
