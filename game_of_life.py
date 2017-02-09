@@ -69,12 +69,12 @@ def game_of_life(size, seed):
     resolve(board)
 
 # scenario 1: death
-# SEED = [8, 9, 13, 17, 18]
+SEED = [8, 9, 13, 17, 18]
 
 # scenario 2: stasis
 # SEED = [7, 8, 12, 13]
 
 # scenario 3: homeostatic
-SEED = [12, 13, 14]
+# SEED = [12, 13, 14]
 
 game_of_life(5, SEED)
